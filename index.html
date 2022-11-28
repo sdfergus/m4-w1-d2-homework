@@ -31,8 +31,9 @@
         <!-- OR <li v-for="item in shoplist">{{item}}</li> -->
       </ul>
 
-      <input id="inputItem" type="text" />
-      <button id="btn">Add item</button>
+      <input id="inputItem" type="text" v-model="newItem" />
+      <button id="btn" v-on:click="addItem">Add item</button>
+      <!-- OR @click -->
     </div>
 
     <script>
@@ -41,11 +42,21 @@
         el: '#root',
 
         data: {
+          newItem: '',
           shoplist: ['Salad', 'Eggs', 'Apples', 'Chicken'],
+        },
+
+        methods: {
+          addItem() {
+            this.shoplist.push(this.newItem);
+
+            this.newItem = ' ';
+          },
         },
 
         /* Using mounted lifecycle hook to fire event listener once everything is ready to go,
         data is bounded and instance mounted to the DOM */
+        /*
         mounted() {
           //Create event listener for button using vanilla JS
           document.querySelector('#btn').addEventListener('click', () => {
@@ -56,6 +67,7 @@
             item.value = ' ';
           });
         },
+        */
       });
     </script>
   </body>
